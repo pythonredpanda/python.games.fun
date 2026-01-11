@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Two Separate Clickers</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 30px; }
+        button { padding: 10px 20px; margin: 5px; font-size: 16px; }
+        .clicker { border: 1px solid #ccc; padding: 20px; margin: 20px; display: inline-block; }
+        h2 { margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>Two Separate Clickers</h1>
+
+    <!-- Clicker 1 -->
+    <div class="clicker">
+        <h2>Clicker 1</h2>
+        Score: <span id="score1">0</span><br><br>
+        <button onclick="addScore1()">Click +1</button><br>
+        <button onclick="buyCursor1()">Cursor (+0.1/sec)</button>
+        Owned: <span id="cursor1">0</span><br>
+    </div>
+
+    <!-- Clicker 2 -->
+    <div class="clicker">
+        <h2>Clicker 2</h2>
+        Score: <span id="score2">0</span><br><br>
+        <button onclick="addScore2()">Click +1</button><br>
+        <button onclick="buyCursor2()">Cursor (+0.2/sec)</button>
+        Owned: <span id="cursor2">0</span><br>
+    </div>
+
+    <script>
+        // --- Clicker 1 ---
+        let score1 = 0;
+        let cursorCount1 = 0;
+        let cursorAdd1 = 0.1;
+
+        function updateDisplay1() {
+            document.getElementById('score1').innerText = score1.toFixed(1);
+            document.getElementById('cursor1').innerText = cursorCount1;
+        }
+
+        function addScore1() { score1 += 1; updateDisplay1(); }
+        function buyCursor1() { cursorCount1 += 1; updateDisplay1(); }
+
+        setInterval(() => {
+            score1 += cursorAdd1 * cursorCount1 / 10; // auto increment
+            updateDisplay1();
+        }, 100);
+
+        updateDisplay1();
+
+        // --- Clicker 2 ---
+        let score2 = 0;
+        let cursorCount2 = 0;
+        let cursorAdd2 = 0.2;
+
+        function updateDisplay2() {
+            document.getElementById('score2').innerText = score2.toFixed(1);
+            document.getElementById('cursor2').innerText = cursorCount2;
+        }
+
+        function addScore2() { score2 += 1; updateDisplay2(); }
+        function buyCursor2() { cursorCount2 += 1; updateDisplay2(); }
+
+        setInterval(() => {
+            score2 += cursorAdd2 * cursorCount2 / 10; // auto increment
+            updateDisplay2();
+        }, 100);
+
+        updateDisplay2();
+    </script>
+</body>
+</html>

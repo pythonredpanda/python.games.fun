@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Score Clicker</title>
+    <style>
+        body { font-family: Arial; text-align: center; margin-top: 50px; }
+        button { padding: 10px 20px; margin: 5px; font-size: 16px; }
+    </style>
+</head>
+<body>
+
+    <h1>Score Clicker</h1>
+    <h2>Score: <span id="score">0</span></h2>
+
+    <button onclick="addScore()">Click for score</button>
+    <br><br>
+
+    <button onclick="buyCursor()">Buy Cursor (+0.1/sec) - Cost: <span id="cursorPrice">10</span></button><br>
+    <button onclick="buyGranma()">Buy Granma (+10/sec) - Cost: <span id="granmaPrice">50</span></button><br>
+    <button onclick="buyFarm()">Buy Farm (+100/sec) - Cost: <span id="farmPrice">200</span></button><br>
+    <button onclick="buyMine()">Buy Mine (+200/sec) - Cost: <span id="minePrice">500</span></button><br><br>
+
+    <button onclick="resetScore()">Reset</button>
+
+    <script>
+        let score = 0;
+        let add = 0;
+
+        // Prices
+        let cursorPrice = 10;
+        let granmaPrice = 50;
+        let farmPrice = 200;
+        let minePrice = 500;
+
+        function updateScore() {
+            document.getElementById('score').innerText = Math.floor(score);
+        }
+
+        function addScore() {
+            score += 1;
+            updateScore();
+        }
+
+        function buyCursor() {
+            if(score >= cursorPrice) {
+                score -= cursorPrice;
+                add += 0.1;
+                cursorPrice = Math.floor(cursorPrice * 1.5);
+                document.getElementById('cursorPrice').innerText = cursorPrice;
+                updateScore();
+            } else { alert("Not enough score!"); }
+        }
+
+        function buyGranma() {
+            if(score >= granmaPrice) {
+                score -= granmaPrice;
+                add += 10;
+                granmaPrice = Math.floor(granmaPrice * 1.5);
+                document.getElementById('granmaPrice').innerText = granmaPrice;
+                updateScore();
+            } else { alert("Not enough score!"); }
+        }
+
+        function buyFarm() {
+            if(score >= farmPrice) {
+                score -= farmPrice;
+                add += 100;
+                farmPrice = Math.floor(farmPrice * 1.5);
+                document.getElementById('farmPrice').innerText = farmPrice;
+                updateScore();
+            } else { alert("Not enough score!"); }
+        }
+
+        function buyMine() {
+            if(score >= minePrice) {
+                score -= minePrice;
+                add += 200;
+                minePrice = Math.floor(minePrice * 1.5);
+                document.getElementById('minePrice').innerText = minePrice;
+                updateScore();
+            } else { alert("Not enough score!"); }
+        }
+
+        function resetScore() {
+            score = 0;
+            add = 0;
+            cursorPrice = 10;
+            granmaPrice = 50;
+            farmPrice = 200;
+            minePrice = 500;
+            document.getElementById('cursorPrice').innerText = cursorPrice;
+            document.getElementById('granmaPrice').innerText = granmaPrice;
+            document.getElementById('farmPrice').innerText = farmPrice;
+            document.getElementById('minePrice').innerText = minePrice;
+            updateScore();
+        }
+
+        // Auto-increment every 100ms
+        setInterval(() => {
+            score += add / 10;
+            updateScore();
+        }, 100);
+
+    </script>
+
+</body>
+</html>
+

@@ -1,4 +1,3 @@
-from flask import Flask, render_template
 
 app = Flask(__name__)
 
@@ -10,5 +9,9 @@ def home():
 def score_clicker():
     return render_template("score_clicker.html")
 
+@app.route("/static/styles.css")
+def coular():
+    return render_template("styles.css")
+
 if __name__ == "__main__":
-        app.run(debug=True)
+    app.run(host="0.0.0.0", port=10000)
